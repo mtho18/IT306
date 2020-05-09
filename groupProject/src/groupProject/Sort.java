@@ -2,8 +2,8 @@ package groupProject;
 import java.util.*;
 
 public class Sort {
-	// Insertion sort is O(n^2)
-    public static SortReturn insertion(ArrayList<String> data) {
+	// insertion sort is O(n^2) w/ arrayList
+    public static SortReturn insertionArr (ArrayList<String> data) {
         long elements = data.size();
         long comparisons = 0;
         long swaps = 0;
@@ -38,18 +38,58 @@ public class Sort {
         }
 
         // fetch results as a string
-        SortReturn sr = new SortReturn("Insertion Sort",comparisons,swaps,totalTime,elements);
+        SortReturn sr = new SortReturn("ArrayList Insertion Sort",comparisons,swaps,totalTime,elements);
         return sr;
     }
     
-    //Collection sort
-    public static SortReturn collection (int[] data) {
-    	long elements = data.length;
+    // insertion sort w/ linked list
+    public static SortReturn insertionLink (CharList data) {
+        long elements = data.size();
         long comparisons = 0;
         long swaps = 0;
-//        long totalTime = (System.nanoTime() - startTime);
-        long totalTime = 0;
-    	SortReturn sr = new SortReturn("Collection Sort",comparisons,swaps,totalTime,elements);
+        int[] result = new int[2];
+        
+        // begin algorithm sort and analysis
+        long startTime = System.nanoTime();
+        result = data.sort();
+        long totalTime = (System.nanoTime() - startTime);
+        
+        // map results
+        comparisons = result[0];
+        swaps = result[1];
+
+        // fetch results as a string
+        SortReturn sr = new SortReturn("LinkedList (Manual) Insertion Sort",comparisons,swaps,totalTime,elements);
+        return sr;
+    }
+    
+    // collection sort w/ arrayList
+    public static SortReturn collectionArr (ArrayList<String> data) {
+    	long elements = data.size();
+        long comparisons = 0;
+        long swaps = 0;
+        
+        // begin algorithm sort and analysis
+        long startTime = System.nanoTime();
+        Collections.sort(data);
+        long totalTime = (System.nanoTime() - startTime);
+        
+    	SortReturn sr = new SortReturn("ArrayList Collection Sort",comparisons,swaps,totalTime,elements);
+    	return sr;
+    }
+    
+    // collection sort w/ arrayList
+    public static SortReturn collectionLink (LinkedList data) {
+    	long elements = data.size();
+        long comparisons = 0;
+        long swaps = 0;
+        
+        // begin algorithm sort and analysis
+        long startTime = System.nanoTime();
+        Collections.sort(data);
+        long totalTime = (System.nanoTime() - startTime);
+        
+    	SortReturn sr = new SortReturn("LinkedList Collection Sort",comparisons,swaps,totalTime,elements);
     	return sr;
     }
 }
