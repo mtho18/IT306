@@ -1,18 +1,21 @@
 package groupProject;
+import java.util.*;
 
 public class Sort {
 	// Insertion sort is O(n^2)
-    public static SortReturn insertion(int[] data) {
-        long elements = data.length;
+    public static SortReturn insertion(ArrayList<String> data) {
+        long elements = data.size();
         long comparisons = 0;
         long swaps = 0;
         
-        int[] temp = new int[data.length];
-        temp[0] = data[0];
-
+        // initiate temp arr @ index 0
+        int[] temp = new int[data.size()];
+        temp[0] = Integer.parseInt(data.get(0));
+        
+        // begin algorithm sort and analysis
         long startTime = System.nanoTime();
-        for (int idx = 1; idx < data.length; idx++) {
-        	temp[idx] = data[idx];
+        for (int idx = 1; idx < data.size(); idx++) {
+        	temp[idx] = Integer.parseInt(data.get(idx));
         	for (int x = idx - 1; x >= 0; x--) {
             	if (temp[x+1] < temp[x]) {
             		comparisons++;
@@ -28,10 +31,13 @@ public class Sort {
         	}
         }
         long totalTime = (System.nanoTime() - startTime);
-        for (int idx = 0; idx < data.length; idx++) {
-        	data[idx] = temp[idx];
+        
+        // replace original data with temp data
+        for (int idx = 0; idx < data.size(); idx++) {
+        	data.set(idx, Integer.toString(temp[idx]));
         }
 
+        // fetch results as a string
         SortReturn sr = new SortReturn("Insertion Sort",comparisons,swaps,totalTime,elements);
         return sr;
     }
