@@ -64,35 +64,62 @@ public class CharList implements CharListable {
     }
     
     public int[] insertSort(int[] result) {
-    	if (this.size() > 1) {
-	    	CharList left = new CharList();
-			CharList right = new CharList();
-			int mid = size() / 2;
-			while (this.size() > mid) {
-				left.addToHead(this.remove());
-				result[0]++;
-			}
-			while (!this.isEmpty()) {
-				right.addToHead(this.remove());
-				result[0]++;
-			}
-			left.insertSort(result);
-			right.insertSort(result);
-			while(!left.isEmpty() && !right.isEmpty()) {
-				if (Integer.parseInt(left.head.data) < Integer.parseInt(right.head.data)) {
-					this.addToTail(left.remove());
-				}
-				else {
-					this.addToTail(right.remove());
-				}
-			}
-			while (!left.isEmpty()) {
-				this.addToTail(left.remove());
-			}
-			while (!right.isEmpty()) {
-				this.addToTail(right.remove());
-			}
+    	Node temp = null;
+    	Node currentNode = head;
+    	Node hold;
+    	while (currentNode != null) {
+    		Node next = currentNode.next;
+    		currentNode.prev = currentNode.next = null;
+    		if (head == null) {
+    			head = currentNode;
+    		}
+    		else if (Integer.parseInt(head.data) >= Integer.parseInt(currentNode.data)) {
+    			currentNode.next = head;
+    			currentNode.next.prev = currentNode;
+    			head = currentNode;
+    		}
+    		else {
+    			hold = head;
+    			while (hold.next != null && Integer.parseInt(hold.next.data) < Integer.parseInt(currentNode.data)) {
+    				hold.next = hold.next;
+    			}
+    			currentNode.next = hold.next;
+    			if (hold.next != null) {
+    				currentNode.next.prev = currentNode;
+    			}
+    			hold.next = currentNode;
+    			currentNode.prev = hold;
+    		}
+    		temp = head;
+    		currentNode = next;
     	}
+    	head = temp;
+//    	CharList temp = new CharList();
+//    	Node currentNode = head;
+//    	Node holdNode = head;
+//    	temp.addToHead(this.remove());
+//    	while (!this.isEmpty()) {
+//    		temp.addToHead(this.remove());
+//    		while (currentNode.next != null) {
+//    			if (currentNode.next != null) {
+//	    			if (Integer.parseInt(currentNode.next.data) < Integer.parseInt(currentNode.data)) {
+//	    				result[0]++;
+//	    				result[1]++;
+//	    				holdNode = currentNode;
+//	    				currentNode = currentNode.next;
+//	    				currentNode.next = holdNode;
+//	    				temp.addToHead(currentNode.data);
+//	    			}
+//	    			else if (Integer.parseInt(currentNode.next.data) >= Integer.parseInt(currentNode.data)) {
+//	    				result[0]++;
+//	    				break;
+//	    			}
+//    			}
+//    		}
+//    	}
+//    	while (!temp.isEmpty()) {
+//    		this.addToHead(temp.remove());
+//    	}
     	return result;
     }
 

@@ -15,14 +15,14 @@ public class testSort {
 	        ArrayList<String> arr = new ArrayList<String>(); // util arrayList
 	        
 	        //named CharList but actually holds int not char
-	        CharList arrLink = new CharList(); // manaul linked list
+	        CharList arrLink = new CharList(); // node linked list
 	        
 	        String rndmInt;
 	        for (int idx = 0; idx < size; idx++) {
 	        	rndmInt = Integer.toString(rndm.nextInt(1000));
 	        	testData[idx] = rndmInt; // util linked list
 	        	arr.add(rndmInt); // util arrayList
-	        	arrLink.addToHead(rndmInt); // manaul linked list
+	        	arrLink.addToHead(rndmInt); // node linked list
 	        }
 	        
 	        // created a linkedList with use of util since collection would not cast CharList
@@ -39,8 +39,11 @@ public class testSort {
 	        	case 0:
 	        		sr = Sort.insertionArr(arr);
 	        		break;
+//	        	case 1:
+//	        		sr = Sort.insertionLinkNode(arrLink);
+//	        		break;
 	        	case 1:
-	        		sr = Sort.insertionLink(arrLink);
+	        		sr = Sort.insertionLink(arrLinkUtil);
 	        		break;
 	        	case 2:
 	        		sr = Sort.collectionArr(arr);
